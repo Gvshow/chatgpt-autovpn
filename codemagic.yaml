@@ -1,0 +1,20 @@
+workflows:
+  android-build:
+    name: Android Build
+    max_build_duration: 60
+    environment:
+      flutter: stable
+      xcode: latest
+      android: latest
+      node: latest
+    scripts:
+      - name: Install dependencies
+        script: |
+          apt-get update -y
+          apt-get install -y gradle
+      - name: Build APK
+        script: |
+          cd android
+          ./gradlew build
+    artifacts:
+      - build/app/outputs/flutter-apk/app-release.apk
